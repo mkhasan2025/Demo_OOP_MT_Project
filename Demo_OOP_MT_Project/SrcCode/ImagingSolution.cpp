@@ -32,6 +32,10 @@ void ImagingSolution::ImagingProcess(char* pSrc, char *pDst){
 	
 	ImageConfigParam->setVideoFrame(pSrc, pDst);
 
+	//BarrierSyncStart->BarrierSyncWait will signal the starting of the
+	//image processing operation (fork) in multiple image processing threads.
+	//BarrierSyncEnd->BarrierSyncWait will signal the ending of the
+	//image processing operation (join) in multiple image processing threads.
 	ImageProcessing1->BarrierSyncStart->BarrierSyncWait(ImageConfigParam->bRunProcessing);
 	ImageProcessing1->BarrierSyncEnd->BarrierSyncWait(ImageConfigParam->bRunProcessing);
 }

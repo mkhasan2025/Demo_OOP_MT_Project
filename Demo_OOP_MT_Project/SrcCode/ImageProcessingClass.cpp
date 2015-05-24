@@ -42,6 +42,10 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 	int nOutWidth = ImageConfigParam->getOutImageWidth();
 	int nOutHeight = ImageConfigParam->getOutImageHeight();
 
+	//For optimizing the code in a homogeneous multicore system, one of the
+	//strategies will be to divide the image rows in equal number of lines and 
+	//run them in parallel in multiple threads. nStartLine and nEndLine will
+	//indicate the starting and ending row-number of each image slice.
 	int nStartLine = (nInHeight / IP_THREAD_NUM)*nThreadID;
 	int nEndLine = (nInHeight / IP_THREAD_NUM)*(nThreadID + 1);
 
@@ -49,8 +53,10 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 		<< nStartLine << " -->> " << nEndLine << endl;
 
 	while (ImageConfigParam->bRunProcessing) {
-		
+		//BarrierSyncStart->BarrierSyncWait will signal the starting of the
+		//image processing operation (fork) in multiple image processing threads.
 		BarrierSyncStart->BarrierSyncWait(ImageConfigParam->bRunProcessing);
+		
 		char* pImageSrc = ImageConfigParam->getImageSrc();
 		char* pImageDst = ImageConfigParam->getImageDst();
 
@@ -64,10 +70,15 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 		//IP_Profile[nThreadID].Profile_End();
 		//IP_Profile[nThreadID].Profile_Print(nThreadID);
 
+		//BarrierSyncEnd->BarrierSyncWait will signal the ending of the
+		//image processing operation (join) in multiple image processing threads.
 		BarrierSyncEnd->BarrierSyncWait(ImageConfigParam->bRunProcessing);
 	}
 }
 
+//ImageProcessingCore function contains the coputation and memory intensive
+//parts of the code. That is why this function will be called from multiple
+//threads multiple times and perform the internal operation in parallel.
 void ImageProcessingClass::ImageProcessingCore(char* pImageDstBlock, 
 	char* pImageSrcBlock, int& nStartLine, int& nEndLine, int nThreadID){
 	
@@ -101,30 +112,3 @@ void ImageProcessingClass::ImageProcessingCore(char* pImageDstBlock,
 		}
 	}
 }
-
-#if 0
-void ImageProcessingClass::ImageProcessingCore(char* pImageDstBlock,
-	char* pImageSrcBlock, int& nStartLine, int& nEndLine, int nThreadID){
-
-	int nInWidth = ImageConfigParam->getInImageWidth();
-	int nInHeight = ImageConfigParam->getInImageHeight();
-	int nOutWidth = ImageConfigParam->getOutImageWidth();
-	int nOutHeight = ImageConfigParam->getOutImageHeight();
-
-	if (nThreadID == 0){
-		for (int i = 0; i < (nEndLine - nStartLine); i++){
-			memcpy(pImageDstBlock + (i*nInWidth), pImageSrcBlock + (i*nOutWidth), nOutWidth);
-		}
-	}
-	else if (nThreadID == 1){
-		for (int i = 0; i < (nEndLine - nStartLine); i++){
-			memset(pImageDstBlock + (i*nInWidth), 0x7, nOutWidth);
-		}
-	}
-	else{
-		for (int i = 0; i < (nEndLine - nStartLine); i++){
-			memset(pImageDstBlock + (i*nInWidth), 0x3, nOutWidth);
-		}
-	}
-}
-#endif
