@@ -1,3 +1,9 @@
+/*
+This class contains the image processing core functionality
+and the thread implementation to run the image processing 
+core in parallel.
+*/
+
 #ifndef __IMAGE_PROCESSING_CLASS
 #define __IMAGE_PROCESSING_CLASS
 
