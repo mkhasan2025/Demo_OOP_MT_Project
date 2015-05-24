@@ -18,7 +18,7 @@ void BarrierSync::BarrierSyncWait(bool& bRunProcessing){
 		nArrivedSignal++;
 
 		if (nArrivedSignal < nThreadNum + 1) {
-			BarrierCond.wait(lk); // [](){if (nArrivedSignal < nThreadNum + 1) return 1;}
+			BarrierCond.wait(lk); // Need to take care of the spurious wake up scenario
 		}
 		else {
 			BarrierCond.notify_all();
