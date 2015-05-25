@@ -33,6 +33,8 @@ void ImageProcessingClass::ImageProcessingInit(){
 	}
 }
 
+//This 'ImageProcessingThreadFunc' function will be called from multiple
+//threads multiple times to perform the internal core operations in parallel.
 void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 
 	//lock_guard<mutex> locker(muImageProcessingThread);
@@ -76,9 +78,9 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 	}
 }
 
-//ImageProcessingCore function contains the coputation and memory intensive
-//parts of the code. That is why this function will be called from multiple
-//threads multiple times and perform the internal operation in parallel.
+//ImageProcessingCore function contains the computation and memory intensive
+//parts of the code. This function will act on the image slice determined by
+//the nStartLine and nEndLine.
 void ImageProcessingClass::ImageProcessingCore(char* pImageDstBlock, 
 	char* pImageSrcBlock, int& nStartLine, int& nEndLine, int nThreadID){
 	
