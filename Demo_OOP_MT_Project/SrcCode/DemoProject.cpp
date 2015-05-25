@@ -12,7 +12,7 @@ void main()
 	cout << "Imaging Solution" << endl;
 	cout << endl << endl << endl << endl;
 
-	int nFrameNum = 100;
+	int nFrameNum = 10;
 
 	int nInImageWidth = 1920;// 40;
 	int nInImageHeight = 1080;// 30;
@@ -36,13 +36,8 @@ void main()
 	//Initialization of Imaging Solution
 	ImagingIF->ImagingInit(nInImageWidth, nInImageHeight, nOutImageWidth, nOutImageHeight);
 
-	float adjusted_value = 555.0;
-	adjusted_value = (int)adjusted_value & 0xFF;
-	cout << adjusted_value << endl;
-
-
 	//This loop represents the incoming Video Frames
-	/*for (int i = 0; i < nFrameNum; i++)
+	for (int i = 0; i < nFrameNum; i++)
 	{
 		//Create Video Frame: demo version
 		memset(pImageSrc, i + 1, nInputFrameSize);
@@ -51,7 +46,7 @@ void main()
 		ImagingIF->ImagingProcess(pImageSrc, pImageDst);
 
 		PrintImage(nOutImageWidth, nOutImageHeight, pImageDst);
-	}*/
+	}
 
 	//Deinitialization of Imaging Solution 
 	ImagingIF->ImagingDeinit();
