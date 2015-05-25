@@ -1,15 +1,15 @@
+#ifndef __CONFIG_PARAM
+#define __CONFIG_PARAM
+
 /*
 ConfigParameter class contains all the basic configuration
-parameters of an image/video frames. This is designed to
-be a singletone class so that only one instance of the class
+parameters of an image/video frames. This is designed to be
+a singletone class so that only one instance of the class
 can be instantiated throughout the project and that single
 object will be used (modified, read) by all other classes.
 ConfigParameter class can be always extended by adding new
 data or function members.
 */
-
-#ifndef __CONFIG_PARAM
-#define __CONFIG_PARAM
 
 #include <iostream>
 
@@ -21,14 +21,15 @@ private:
 	int nOutImageWidth, nOutImageHeight;
 	char *pImageSrc, *pImageDst;
 
-	//As a singletone class, the constructor of this
-	//class has been declared as private to disable
-	//the instantiation of this class via contructor.
+	//As a singletone class, the constructor of this class
+	//has been declared as private to disable any kind of
+	//instantiation of this class via contructor.
 	ConfigParameter();
 
-	//cpInstanceFlag will be used to control the object
-	//instantiation of this singletone class.
+	//static bool cpInstanceFlag will be used as a flag to
+	//track object instantiation of this singletone class.
 	static bool cpInstanceFlag;
+
 	//static member cpInstance denotes the pointer to the
 	//only object that will be instantiated from this class 
 	static ConfigParameter *cpInstance;
@@ -55,8 +56,8 @@ public:
 	char* getImageSrc();
 	char* getImageDst();
 	
-	//Disable the default copy-constructor and copy-assignment-operator
-	//for this class to protect its singletone nature.
+	//Disable the default copy-constructor and copy-assignment
+	//operator for this class to protect its singletone nature.
 	ConfigParameter(const ConfigParameter&) = delete;
 	ConfigParameter & operator=(const ConfigParameter&) = delete;
 };

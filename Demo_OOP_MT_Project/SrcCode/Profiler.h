@@ -2,10 +2,12 @@
 #define __PROFILER_
 
 /*
-This class works for the purpose of software profiling. I
-am trying to use the C++11 here for this purpose instead
-of the C codes I have always used. For some reasons, it is
-not working right now. I will make it work in future.
+This class works for the purpose of software profiling.
+Having a profiler class of this type is very important 
+in any project. I am trying to use the C++11 here for 
+this purpose instead of the C codes which I have always
+used in the past. For some reasons, it is not working
+right now. I will make it work in future.
 */
 
 #include<iostream>

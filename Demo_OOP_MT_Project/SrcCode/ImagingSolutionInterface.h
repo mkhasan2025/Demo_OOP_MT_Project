@@ -17,10 +17,10 @@ enum ImagingSolutionEnum
 /*
 ImagingSolutionInterface is an abstract class, which means it cannot
 be instantiated. This class has been created to polimorphically provide 
-an interface for the various child classes it has. All the interfaces 
-are provided via pure virtual functions which are overriden by the 
-functions in the clild classes. This is how the implementation detail
-has been hidden from the outside world.
+an interface for its various child classes. All the interfaces are 
+provided via pure virtual functions which are overriden by the functions
+in the clild classes. This is how the implementation detail has been 
+hidden from the outside world.
 */
 
 class ImagingSolutionInterface
@@ -49,7 +49,6 @@ public:
 	//feature) will be returned polimorphically by casting them as a base class.
 	//The parameter nSolutionID which is passed in from the outside will be
 	//used to decide which child class will be instantiated and then retured.
-	//static ImagingSolutionInterface* GetImagingSolutionInstance(int nSolutionID);
 	
 	static ImagingSolutionInterface* GetImagingSolutionInstance(int nSolutionID);
 };

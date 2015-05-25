@@ -9,6 +9,7 @@ ImagingSolution::ImagingSolution()
 }
 
 ImagingSolution::~ImagingSolution(){
+	
 	delete ImageProcessing1;
 	delete ImageConfigParam;
 

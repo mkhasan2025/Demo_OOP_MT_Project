@@ -12,7 +12,7 @@ ConfigParameter::~ConfigParameter(){
 //and 'cpInstance' will make sure that it will always have a 
 //single instance regardless of how many times the object has
 //been instantiated in different other classes. Thus it will
-//ensure the singletone design objective of this ConfigParameter
+//ensure the singletone design objective of the ConfigParameter
 //class.
 bool ConfigParameter::cpInstanceFlag = false;
 ConfigParameter* ConfigParameter::cpInstance = NULL;

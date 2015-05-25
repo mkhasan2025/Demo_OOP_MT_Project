@@ -7,7 +7,7 @@ ImageProcessingClass::ImageProcessingClass(){
 	ImageConfigParam = ConfigParameter::getSingletoneInstance();
 
 	BarrierSyncStart = new BarrierSync(IP_THREAD_NUM);
-	BarrierSyncEnd	 = new BarrierSync(IP_THREAD_NUM);
+	BarrierSyncEnd = new BarrierSync(IP_THREAD_NUM);
 }
 
 ImageProcessingClass::~ImageProcessingClass(){
@@ -33,8 +33,9 @@ void ImageProcessingClass::ImageProcessingInit(){
 	}
 }
 
-//This 'ImageProcessingThreadFunc' function will be called from multiple
-//threads multiple times to perform the internal core operations in parallel.
+//This 'ImageProcessingThreadFunc' function will be 
+//called from multiple threads multiple times to 
+//perform the internal core operations in parallel.
 void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 
 	//lock_guard<mutex> locker(muImageProcessingThread);
@@ -44,10 +45,12 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 	int nOutWidth = ImageConfigParam->getOutImageWidth();
 	int nOutHeight = ImageConfigParam->getOutImageHeight();
 
-	//For optimizing the code in a homogeneous multicore system, one of the
-	//strategies will be to divide the image rows in equal number of lines and 
-	//run them in parallel in multiple threads. nStartLine and nEndLine will
-	//indicate the starting and ending row-number of each image slice.
+	//For optimizing the code in a homogeneous multicore
+	//system, one of the strategies will be to divide the
+	//image rows in equal number of lines and run them in 
+	//parallel in multiple threads. nStartLine and nEndLine
+	//indicates the starting and ending row-number of each 
+	//image slice.
 	int nStartLine = (nInHeight / IP_THREAD_NUM)*nThreadID;
 	int nEndLine = (nInHeight / IP_THREAD_NUM)*(nThreadID + 1);
 
@@ -62,6 +65,8 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 		char* pImageSrc = ImageConfigParam->getImageSrc();
 		char* pImageDst = ImageConfigParam->getImageDst();
 
+		//pImageSrcBlock and pImageDstBlock point to the starting
+		//point of the image slice corresponding to this thread
 		char* pImageSrcBlock = pImageSrc + (nStartLine*nInWidth);
 		char* pImageDstBlock = pImageDst + (nStartLine*nOutWidth);
 		
@@ -78,9 +83,9 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 	}
 }
 
-//ImageProcessingCore function contains the computation and memory intensive
-//parts of the code. This function will act on the image slice determined by
-//the nStartLine and nEndLine.
+//ImageProcessingCore function contains the computation and memory
+//intensive parts of the code. This function will act on the image
+//slice (determined by the nStartLine and nEndLine parameters).
 void ImageProcessingClass::ImageProcessingCore(char* pImageDstBlock, 
 	char* pImageSrcBlock, int& nStartLine, int& nEndLine, int nThreadID){
 	

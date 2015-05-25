@@ -6,8 +6,8 @@ ImagingSolution class is one of the classes derived from the abstract
 base class named ImagingSolutionInterface. This class contains the 
 functionality of a certain feature (eg. ImageProcessingClass) or a 
 combination of features or a certain version. It will act as a 
-polimorphically derived class of ImagingSolutionInterface and that is
-why, it defines all the virtual function of its base class. 
+polimorphically derived class of ImagingSolutionInterface. That is
+why, it overrides all the pure virtual function of its base class. 
 */
 
 #include<iostream>
