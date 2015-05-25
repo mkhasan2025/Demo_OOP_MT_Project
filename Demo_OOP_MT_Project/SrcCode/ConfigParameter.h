@@ -1,6 +1,6 @@
 /*
 ConfigParameter class contains all the basic configuration
-parameters of a the image/video frames. This is designed to
+parameters of an image/video frames. This is designed to
 be a singletone class so that only one instance of the class
 can be instantiated throughout the project and that single
 object will be used (modified, read) by all other classes.
@@ -40,9 +40,9 @@ public:
 
 	static ConfigParameter* getSingletoneInstance();
 	
-	//These two setter functions set the basic config parameters to the class
-	//member of ConfigParameters class. Once set, as the same instance will be
-	//used in every other class, these assigned values can be accessed everywhere
+	//These two setter functions set the basic config parameters to the member
+	//of ConfigParameters class. Once set, as the same instance will be used
+	//in every other class, these assigned values can be accessed everywhere
 	//using the following get functions.
 	void setImageConfigParam(int& nInWidth, int& nInHeight, int& nOutWidth, int& nOutHeight);
 	void setVideoFrame(char *pSrc, char *pDst);
@@ -56,7 +56,7 @@ public:
 	char* getImageDst();
 	
 	//Disable the default copy-constructor and copy-assignment-operator
-	//for this singletone class.
+	//for this class to protect its singletone nature.
 	ConfigParameter(const ConfigParameter&) = delete;
 	ConfigParameter & operator=(const ConfigParameter&) = delete;
 };
