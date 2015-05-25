@@ -25,7 +25,7 @@ ImagingSolutionInterface* ImagingSolutionInterface::GetImagingSolutionInstance(i
 
 	case IMAGING_SOLUTION_3:
 		return NULL; //TEMP
-			break;
+		break;
 
 	default:
 		return NULL;
