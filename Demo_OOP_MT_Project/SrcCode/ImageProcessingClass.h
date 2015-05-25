@@ -42,9 +42,9 @@ private:
 		int& nStartLine, int& nEndLine, int nThreadID);
 
 	//All non-static class member functions have a hidden 'this' pointer.
-	//That is why ImageProcessingThreadFunc() cannot passed in as a
-	//parameter to the thread create function. On the other hand, static
-	//member functions do not have a this pointer. So a static wrapper
+	//That is why ImageProcessingThreadFunc() cannot be passed in as a
+	//parameter to the thread creation function. On the other hand, static
+	//member functions do not have a 'this' pointer. So a static wrapper
 	//function is needed for the ImageProcessingThreadFunc() when passing 
 	//it as a parameter during the thread initiation.
 	static void ImageProcessingThreadFuncWrapper(void *arg, const int& nThreadID){
