@@ -27,7 +27,7 @@ private:
 	// cpInstanceFlag will be used to control the object
 	// instantiation of this singletone class.
 	static bool cpInstanceFlag;
-	// static member cpInstance denote the pointer to the
+	// static member cpInstance denotes the pointer to the
 	// only object that will be instantiated from this class 
 	static ConfigParameter *cpInstance;
 
