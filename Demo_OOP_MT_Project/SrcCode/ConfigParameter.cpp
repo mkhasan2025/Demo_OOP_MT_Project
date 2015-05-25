@@ -7,6 +7,13 @@ ConfigParameter::~ConfigParameter(){
 	cpInstanceFlag = false;
 }
 
+//static class members have to be always initiated outside the 
+//definition of the class. The static member 'cpInstanceFlag'
+//and 'cpInstance' will make sure that it will always have a 
+//single instance regardless of how many times the object has
+//been instantiated in different other classes. Thus it will
+//ensure the singletone design objective of this ConfigParameter
+//class.
 bool ConfigParameter::cpInstanceFlag = false;
 ConfigParameter* ConfigParameter::cpInstance = NULL;
 

@@ -26,8 +26,8 @@ static const int IP_THREAD_NUM = 3;
 class ImageProcessingClass{
 private:
 	
-	//ConfigParameter's singletone instance is one of the 
-	//class members of ImageProcessingClass.
+	//ConfigParameter's singletone instance is one 
+	//of the class members of ImageProcessingClass.
 	ConfigParameter *ImageConfigParam;
 	Profiler IP_Profile[IP_THREAD_NUM];
 	

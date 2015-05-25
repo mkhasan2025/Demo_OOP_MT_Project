@@ -1,6 +1,13 @@
 #ifndef __PROFILER_
 #define __PROFILER_
 
+/*
+This class works for the purpose of software profiling. I
+am trying to use the C++11 here for this purpose instead
+of the C codes I have always used. For some reasons, it is
+not working right now. I will make it work in future.
+*/
+
 #include<iostream>
 #include<chrono>
 #include<Windows.h>

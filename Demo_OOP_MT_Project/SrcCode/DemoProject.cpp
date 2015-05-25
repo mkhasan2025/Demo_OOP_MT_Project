@@ -76,12 +76,3 @@ void PrintImage(int& nWidth, int& nHeight, char *pImage){
 	}
 	cout << endl << endl;
 }
-
-//To do 1: Need to do something about the spurious wake up 
-//inside the barrierSync's conditional variable
-
-//To do 2: Write documentation inside the code
-
-//To do 3: Smart Pointer wherever possible
-
-//To do 4: 

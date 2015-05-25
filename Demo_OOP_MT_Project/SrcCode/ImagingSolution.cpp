@@ -21,7 +21,6 @@ void ImagingSolution::ImagingInit(int nInWidth, int nInHeight, int nOutWidth, in
 	ImageProcessing1->ImageProcessingInit();
 
 	ImageConfigParam->bRunProcessing = true;
-
 }
 
 void ImagingSolution::ImagingDeinit(){
