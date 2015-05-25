@@ -1,7 +1,9 @@
 /*
 This class contains the image processing core functionality
 and the thread implementation to run the image processing 
-core in parallel.
+core in parallel. The techniques demonstrated in this class
+can be used as a template to declare any other class which 
+can do any kind of task in parallel.
 */
 
 #ifndef __IMAGE_PROCESSING_CLASS
