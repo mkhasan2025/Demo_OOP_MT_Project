@@ -7,19 +7,22 @@ ConfigParameter::~ConfigParameter(){
 	cpInstanceFlag = false;
 }
 
-//static class members have to be always initiated outside the 
+//static class members have to be always initiated outside the
 //definition of the class. The static member 'cpInstanceFlag'
-//and 'cpInstance' will make sure that it will always have a 
-//single instance regardless of how many times the object has
-//been instantiated in different other classes. Thus it will
-//ensure the singletone design objective of the ConfigParameter
-//class.
+//and 'cpInstance' will make sure that it will always have only
+//one instance regardless of how many times the object has been
+//instantiated in different other classes. Thus it will ensure
+//the singletone design objective of the ConfigParameter class.
+
 bool ConfigParameter::cpInstanceFlag = false;
 ConfigParameter* ConfigParameter::cpInstance = NULL;
 
 ConfigParameter* ConfigParameter::getSingletoneInstance(){
 	
 	if (!cpInstanceFlag){
+		//Memory allocation for 'static ConfigParameter* cpInstance'
+		//will be done only once when the 'getSingletoneInstance()'
+		//function will be called for the first time.
 		cout << "Inside ConfigParameter::getInstance()" << endl;
 		cpInstance = new ConfigParameter();
 		cpInstanceFlag = true;
