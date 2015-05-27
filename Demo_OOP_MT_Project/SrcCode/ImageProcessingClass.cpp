@@ -16,6 +16,8 @@ ImageProcessingClass::~ImageProcessingClass(){
 	BarrierSyncStart->BarrierSyncReset();
 	BarrierSyncEnd->BarrierSyncReset();
 	
+	//All of the threads which were created in the initialization
+	//phase, should join in the destructor of 'ImageProcessingClass'
 	for (int i = 0; i < IP_THREAD_NUM; i++){
 		tImageProcessingThread[i].join();
 		//cout << "ImageProcessingThread Join: " << i << endl;
@@ -27,15 +29,16 @@ ImageProcessingClass::~ImageProcessingClass(){
 
 void ImageProcessingClass::ImageProcessingInit(){
 
+	//To accelerate this image processing task we created 
+	//multiple threads to perform the sub-tasks in parallel.
 	for (int i = 0; i < IP_THREAD_NUM; i++){
 		tImageProcessingThread[i] = thread(ImageProcessingThreadFuncWrapper, this, i);
 		//cout << "ImageProcessingThread Create: " << i << endl;
 	}
 }
 
-//This 'ImageProcessingThreadFunc' function will be 
-//called from multiple threads multiple times to 
-//perform the internal core operations in parallel.
+//This 'ImageProcessingThreadFunc' function will be called from multiple
+//threads multiple times to perform the internal core operations in parallel.
 void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 
 	//lock_guard<mutex> locker(muImageProcessingThread);
@@ -58,8 +61,9 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 		<< nStartLine << " -->> " << nEndLine << endl;
 
 	while (ImageConfigParam->bRunProcessing) {
-		//BarrierSyncStart->BarrierSyncWait will signal the starting of the
-		//image processing operation (fork) in multiple image processing threads.
+		//BarrierSyncStart->BarrierSyncWait will signal
+		//the starting of the image processing operation
+		//(fork) in multiple image processing threads.
 		BarrierSyncStart->BarrierSyncWait(ImageConfigParam->bRunProcessing);
 		
 		char* pImageSrc = ImageConfigParam->getImageSrc();
@@ -77,8 +81,9 @@ void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 		//IP_Profile[nThreadID].Profile_End();
 		//IP_Profile[nThreadID].Profile_Print(nThreadID);
 
-		//BarrierSyncEnd->BarrierSyncWait will signal the ending of the
-		//image processing operation (join) in multiple image processing threads.
+		//BarrierSyncEnd->BarrierSyncWait will signal
+		//the ending of the image processing operation
+		//(join) in multiple image processing threads.
 		BarrierSyncEnd->BarrierSyncWait(ImageConfigParam->bRunProcessing);
 	}
 }
