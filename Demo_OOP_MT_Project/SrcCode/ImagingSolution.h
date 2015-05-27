@@ -1,3 +1,5 @@
+//contact: mkhasan2025@gmail.com
+
 #ifndef __IMAGING_SOLUTION
 #define __IMAGING_SOLUTION
 
@@ -6,7 +8,7 @@ ImagingSolution class is one of the classes derived from the abstract
 base class named ImagingSolutionInterface. This class contains the 
 functionality of a certain feature (eg. ImageProcessingClass) or a 
 combination of features or a certain version. It will act as a 
-polimorphically derived class of ImagingSolutionInterface. That is
+polymorphically derived class of ImagingSolutionInterface. That is
 why, it overrides all the pure virtual function of its base class. 
 */
 

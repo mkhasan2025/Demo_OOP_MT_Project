@@ -29,16 +29,17 @@ ImageProcessingClass::~ImageProcessingClass(){
 
 void ImageProcessingClass::ImageProcessingInit(){
 
-	//To accelerate this image processing task we created 
-	//multiple threads to perform the sub-tasks in parallel.
+	//To accelerate this image processing task and fully 
+	//utilizing a multi-core system, several threads have
+	//been created to perform the sub-tasks in parallel.
 	for (int i = 0; i < IP_THREAD_NUM; i++){
 		tImageProcessingThread[i] = thread(ImageProcessingThreadFuncWrapper, this, i);
 		//cout << "ImageProcessingThread Create: " << i << endl;
 	}
 }
 
-//This 'ImageProcessingThreadFunc' function will be called from multiple
-//threads multiple times to perform the internal core operations in parallel.
+//'ImageProcessingThreadFunc' function will be called from multiple
+//threads to perform the internal core operations in parallel.
 void ImageProcessingClass::ImageProcessingThreadFunc(const int& nThreadID){
 
 	//lock_guard<mutex> locker(muImageProcessingThread);
